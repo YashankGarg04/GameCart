@@ -8,7 +8,7 @@ export const inngest = new Inngest({ id: "gamecart-next" });
 // inngest function to save user data to a database
 export const syncUserCreation = inngest.createFunction(
     {
-        if:'sync-user-from-clerk'
+        id:'sync-user-from-clerk'
     },
     { event:'clerk/user.created'},
     async ({event}) => {
@@ -53,5 +53,33 @@ export const syncUserDeletion = inngest.createFunction(
         const{id} = event.data
         await connectDB()
         await User.findByIdAndDelete(id)
+    }
+)
+
+// Inngest Function to create user's order in database
+export const createUserOrder = inngest.createFunction(
+    {
+        id:'create-user-order',
+        batchEvents:{
+            maxSize: 5,
+            timeout: '5s'
+        }
+    },
+    {event: 'order/created'},
+    async ({events}) => {
+        const orders = events.map(()=> {
+            return {
+                userId: events.data.userId,
+                items: events.data.items,
+                amount: events.data.amount,
+                address: events.data.address,
+                date: events.data.date
+            }
+        })
+
+        await connectDB()
+        await Order.insertMany(orders)
+
+        return {success:true, processes: orders.length};
     }
 )
