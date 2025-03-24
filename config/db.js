@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { cache } from "react";
+
 let cached = global.mongoose
 
 if(!cached){
@@ -13,8 +13,9 @@ async function connectDB() {
         const opts = {
             bufferCommands:false
         }
-        cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/gamecart`, opts).then(mongoose)
-        return mongoose
+        cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/gamecart`, opts).then(mongoose =>{
+            return mongoose
+        })
     }
 
     cached.conn = await cached.promise
