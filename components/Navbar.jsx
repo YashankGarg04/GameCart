@@ -39,7 +39,14 @@ const Navbar = () => {
       </div>
 
       <ul className="hidden md:flex items-center gap-4 ">
-        <Image className="w-4 h-4" src={assets.search_icon} alt="search icon" />
+      <button onClick={() => router.push('/spin-the-wheel')} className="flex items-center gap-2 hover:text-gray-900 transition">
+        <span className="material-symbols-outlined">attractions</span>
+        Spin the Wheel
+      </button>
+        <div class="theme-toggler">
+          <span class="material-symbols-outlined">light_mode</span>
+          <span class="material-symbols-outlined">dark_mode</span>
+        </div>
         { user 
         ? <>
         <UserButton>
