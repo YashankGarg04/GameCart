@@ -39,14 +39,14 @@ const Navbar = () => {
       </div>
 
       <ul className="hidden md:flex items-center gap-4 ">
-      <button onClick={() => router.push('/spin-the-wheel')} className="flex items-center gap-2 hover:text-gray-900 transition">
+      <div onClick={() => router.push('/spin-the-wheel')} className="hover:text-gray-900 transition">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=attractions" />
         <span className="material-symbols-outlined">attractions</span>
-        Spin the Wheel
-      </button>
-        <div class="theme-toggler">
-          <span class="material-symbols-outlined">light_mode</span>
-          <span class="material-symbols-outlined">dark_mode</span>
-        </div>
+      </div>
+      <div className="theme-toggler">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=no_adult_content" />
+        <span className="material-symbols-outlined">no_adult_content</span>
+      </div>
         { user 
         ? <>
         <UserButton>

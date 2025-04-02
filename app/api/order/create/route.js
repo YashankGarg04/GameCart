@@ -23,7 +23,7 @@ export async function POST(request) {
             return await acc + product.offerPrice * item.quantity;
         },0)
 
-        await inngest.send``({
+        await inngest.send({
             name: 'order/created',
             data: {
                 userId,
